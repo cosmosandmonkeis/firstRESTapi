@@ -60,6 +60,7 @@ def get_users():
         return resp
 
 
+# this route will return the first user if it's a get request or it will delete if it's a delete request
 @app.route('/users/<id>', methods=['GET', 'DELETE'])
 def get_user(id):
     if id:
@@ -71,4 +72,16 @@ def get_user(id):
                     users['users_list'].remove(user)
                     return user
         return {}
+    return users
+
+
+# this route will return a user if there is a name and user that matches the uri params
+@app.route('/users/<name>/<job>', methods=['GET'])
+def get_user_given_nameandjob(name, job):
+    if name and job:
+        subdict = {}
+        for user in users['users_list']:
+            if user['name'] == name and user['job'] == job:
+                subdict[user['id']] = user
+        return subdict
     return users
