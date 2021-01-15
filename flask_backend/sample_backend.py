@@ -60,7 +60,7 @@ def get_users():
         sixdigitrand = random.randint(100, 1000000)
         userToAdd["id"] = str(sixdigitrand)
         users['users_list'].append(userToAdd)
-        resp = jsonify(success=True)
+        resp = jsonify(success=True, added=userToAdd)
         resp.status_code = 201  # optionally, you can always set a response code.
         # 200 is the default code for a normal response
         return resp
